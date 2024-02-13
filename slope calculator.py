@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb  4 16:07:28 2024
-@author: Adrian Hall
+@author: Adrian H
 
 Update Mon Feb 5 18:42 2024
  - Changed ints to strs for printing without extra spaces.
@@ -11,11 +11,10 @@ Update Sun Feb 11 12:56 2024
  - Updated todo list
  - Drafted algo steps
  - Added "math" import and absolute value function
- 
+
 """
 
 # import the "math" module so that we can get absolute value later
-
 import math
 
 print("This program will calculate\nthe slope and equation for\na line between two points.")
@@ -23,7 +22,6 @@ print("This program will calculate\nthe slope and equation for\na line between t
 print() # blank line for spacing
 
 # get the data for both points
-
 print("Point 1 coordinates:")
 x1 = int(input(" -> X:"))
 y1 = int(input(" -> Y:"))
@@ -99,46 +97,40 @@ print(" y = (" +
       str(b) +
       ".")
 
-
 # todo: if b is negative output "- absolute_b" instead of "+ b"
 '''
-if b<0
-
-absolute_b = math.fabs(b)
-
+  if b<0
+  absolute_b = math.fabs(b)
+  # should we make these variables regardless of whether or not we are using them?
 '''
 
 # todo: if both m_dividend and m_divisor are negative, output absolute val
-
 '''
-if m_dividend < 0
-
-absolute_m_dend = math.fabs(m_dividend)
-
-absolute_m_dsor = math.fabs(m_divisor)
-
+  if m_dividend < 0
+  absolute_m_dend = math.fabs(m_dividend)
+  absolute_m_dsor = math.fabs(m_divisor)
 '''
-
 
 # todo: if m and/or b are whole numbers, output them as whole numbers
 '''
 if m_dividend % m_divisor == 0, 
 then print m_int not m
-
  # see if b is a whole number
- 
 then print m_int and b_int
-
 '''
 
 # todo: if m is a whole number, do not print the 2nd equation or slope
+
 ''' 
-# test if m is a whole number
-
-
+  # how to test if m is a whole number
+    > get the type of m, if int (this will not work b/c people can put in fractions for x/y points)
+    > divide by 2, if r=1 or r=0 (maybe?)
 '''
 
 # todo: graph? (can you generate a graph using a turtle?)
+''' 
+  Pretty sure there is a way to import a math graph module for this
+'''
 
 # todo: reduce fractions
 '''
@@ -161,10 +153,8 @@ then print m_int and b_int
             3*0 + 3
             3*1 + 3 = 6 [THIS DOES NOT WORK]
             2*2 + 2 = 6 [THIS DOES NOT WORK]
-        d. the denominator is m_divisor still..?
-            5
-        
-    
+        how do we get 10/4 to 5/2
+         > look into prime numbers...?  
 '''
 
 # end program
