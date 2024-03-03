@@ -12,6 +12,9 @@ Update Sun Feb 11 12:56 2024
  - Drafted algo steps
  - Added "math" import and absolute value function
 
+Update Sat Mar 02 16:05 2024
+ - Added error message if slope == 0
+
 """
 
 # import the "math" module so that we can get absolute value later
@@ -42,6 +45,11 @@ m = float(f'{(y2 - y1) / (x2 - x1):.2f}')
 m_dividend = y2 - y1
 m_divisor = x2 - x1
 
+if m_divisor == 0
+    print("Error: Can not divide by zero.")
+    print("Slope of line is 0.")
+    quit() # ends the program
+
 # calculate b
 # y = mx + b, so b = y - mx
 
@@ -55,13 +63,6 @@ b = y1
 '''
 
 
-# add an error message if m_divisor is 0
-'''
-    if m_divisor == 0
-    print("Error: Can not divide by zero.")
-    print("Slope of line is 0.")
-    end program
-'''
 
 
 # other vars
