@@ -22,6 +22,11 @@ Update Tue Mar 05 13:06 2024
  - Added decision trees
  - Mixed comment formatting for legibility
  - Added pyplot import for eventual graphing shenanigans
+
+Update 17:14
+ - todo: fix whatever i broke with the fraction thing
+ - todo: check that the slope is actually accurate
+ - todo: added the m == 1 or m == -1 comments
 """
 
 import math # for greatest common factor (i'm ignoring abs)
@@ -65,6 +70,7 @@ elif m_dividend == 0:
 else:
   # no errors
 
+''' I messed something up here idk what though '''
 if (m_dividend < 0) and (m_divisor < 0): # if both the numerator & denominator are negative
   m_dividend = 0 - m_dividend # make them both positive for display purposes
   m_divisor = 0 - m_divisor # make them both positive for display purposes
@@ -74,8 +80,8 @@ if (m_dividend < 0) and (m_divisor < 0): # if both the numerator & denominator a
 # if gcd != 1 then we can simplify
 
 if (math.gcd(m_dividend, m_divisor) != 1:
-  m_dividend = m_dividend/(math.gcd(m_dividend, m_divisor)) '''does this need to be declared as int() or is it implied?'''
-  m_divisor = m_divisor/(math.gcd(m_dividend, m_divisor))
+  m_dividend = int(m_dividend/(math.gcd(int(m_dividend), int(m_divisor))))
+  m_divisor = int(m_divisor/(math.gcd(int(m_dividend), int(m_divisor))))
 # no else needed
 
 ''' calculating b '''
@@ -88,6 +94,8 @@ if (b - ( b // 1) ) == 0: # if b is a whole number
 # no else needed
   
 ''' calculate and output the slope (m) and full equation '''
+
+''' todo: if m == 1, don't show it, if m == -1 then just show - '''
 
 if m_dividend % m_divisor == 0: # if m is a whole number fraction displays are not needed
   m = int(m_dividend / m_divisor) # calculate m as int
@@ -113,7 +121,7 @@ else: # m is not a whole number
     print(f' y = ({m_dividend}/{m_divisor})x + {b}')
   elif b < 0: # if b is less than 0
     b = 0 - b # make it positive for display purposes
-    print(f' y = {m}x - {b_abs}') # use - b instead of + b
+    print(f' y = {m}x - {b}') # use - b instead of + b
     print("or")
     print(f' y = ({m_dividend}/{m_divisor})x - {b}')
   else: # if b == 0 remove it entirely
