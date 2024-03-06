@@ -71,9 +71,9 @@ if (m_dividend < 0) and (m_divisor < 0): # if both the numerator & denominator a
 # no else needed
 
 ''' reduce fractions ''' 
-# if gcd != divisor AND dividend >= divisor, then we can simplify, otherwise leave it as is because it will turn into a whole number
+# if gcd != 1 then we can simplify
 
-if (math.gcd(m_dividend, m_divisor) != m_divisor) and (m_dividend >= m_divisor):
+if (math.gcd(m_dividend, m_divisor) != 1:
   m_dividend = m_dividend/(math.gcd(m_dividend, m_divisor)) '''does this need to be declared as int() or is it implied?'''
   m_divisor = m_divisor/(math.gcd(m_dividend, m_divisor))
 # no else needed
