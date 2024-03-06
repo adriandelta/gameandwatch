@@ -4,7 +4,7 @@ Created on Sun Feb  4 16:07:28 2024
 @author: Adrian H
 
 Update Mon Feb 5 18:42 2024
- - Changed ints to strs for printing without extra spaces.
+ - Changed ints to strs for printing without extra spaces
  - Added comments for todo list
  
 Update Sun Feb 11 12:56 2024
@@ -15,147 +15,117 @@ Update Sun Feb 11 12:56 2024
 Update Sat Mar 02 16:05 2024
  - Added error message if slope == 0
 
+Update Tue Mar 05 13:06 2024
+ - Updated outputs to use f'{var}' format where needed
+ - Added message if slope == 0, fixed previous error to mean slope is undefined / line is vert
+ - Finished a bunch of todos and moved things around for consolidation
+ - Added decision trees
+ - Mixed comment formatting for legibility
+ - Added pyplot import for eventual graphing shenanigans
 """
 
-# import the "math" module so that we can get absolute value later
-import math
+import math # for greatest common factor (i'm ignoring abs)
+import matplotlib.pyplot #  for graphing the line (eventually)
 
-print("This program will calculate\nthe slope and equation for\na line between two points.")
-
+print("This program will calculate \nthe slope and equation for \na line between two points.")
 print() # blank line for spacing
 
-# get the data for both points
+''' get the input data for both points '''
+
 print("Point 1 coordinates:")
 x1 = int(input(" -> X:"))
 y1 = int(input(" -> Y:"))
-print("Point 1 = (" + str(x1) + "," + str(y1) + ")")
+print(f'Point 1 = ({x1},{y1})')
 
 print() # blank line for spacing
 
 print("Point 2 coordinates:")
 x2 = int(input(" -> X:"))
 y2 = int(input(" -> Y:"))
-print("Point 2 = (" + str(x2) + "," + str(y2) + ")")
+print(f'Point 2 = ({x2},{y2})')
 
 print() # blank line for spacing
 
-# run the calculations
+''' setting up to calculate m '''
 
-m = float(f'{(y2 - y1) / (x2 - x1):.2f}')
 m_dividend = y2 - y1
 m_divisor = x2 - x1
 
-if m_divisor == 0
-    print("Error: Can not divide by zero.")
-    print("Slope of line is 0.")
-    quit() # ends the program
+# if m = 0 or error, then the equations are y = y1 or x = x1 (respectively)
+if m_divisor == 0:
+  print("Error: Can not divide by zero. \nThe slope of a vertical line is undefined.")
+  print("The equation for the line between points 1 & 2 is")
+  print(f' x = {x1}')
+  quit() # ends the program
+elif m_dividend == 0:
+  print("The slope of a horizontal line is 0.")
+  print("The equation for the line between points 1 & 2 is")
+  print(f' y = {y1}')
+  quit() # ends the program
+else:
+  # no errors
 
-# calculate b
+if (m_dividend < 0) and (m_divisor < 0): # if both the numerator & denominator are negative
+  m_dividend = 0 - m_dividend # make them both positive for display purposes
+  m_divisor = 0 - m_divisor # make them both positive for display purposes
+# no else needed
+
+''' reduce fractions ''' 
+# if gcd != divisor AND dividend >= divisor, then we can simplify, otherwise leave it as is because it will turn into a whole number
+
+if (math.gcd(m_dividend, m_divisor) != m_divisor) and (m_dividend >= m_divisor):
+  m_dividend = m_dividend/(math.gcd(m_dividend, m_divisor)) '''does this need to be declared as int() or is it implied?'''
+  m_divisor = m_divisor/(math.gcd(m_dividend, m_divisor))
+# no else needed
+
+''' calculating b '''
 # y = mx + b, so b = y - mx
 
-'''
-if there are no errors
-'''
-b = y1 - (m * x1)
-'''
-otherwise
-b = y1
-'''
+b = y1 - (m * x1) # if m is a float here, then b will output as a float
+
+if (b - ( b // 1) ) == 0: # if b is a whole number
+  b = int(b) # change type from float to int
+# no else needed
+  
+''' calculate and output the slope (m) and full equation '''
+
+if m_dividend % m_divisor == 0: # if m is a whole number fraction displays are not needed
+  m = int(m_dividend / m_divisor) # calculate m as int
+  print(f'The slope of the line between points 1 & 2 is {m}.')
+  print() # blank line
+  print("The equation for the line between points 1 & 2 is")
+  if b > 0: # if b is greater than or equal to 0
+    print(f' y = {m}x + {b}')
+  elif b < 0: # if b is less than 0
+    b = 0 - b # make it positive for display purposes
+    print(f' y = {m}x - {b_abs}') # use - b instead of + b
+  else: # if b == 0 remove it entirely
+    print(f' y = {m}x')
+
+else: # m is not a whole number
+  m = float(f'{(m_dividend) / (m_divisor):.2f}') # calculate m as float
+  print(f'The slope of the line between points 1 & 2 is {m}, or {m_dividend}/{m_divisor}.')
+  print() # blank line
+  print("The equation for the line between points 1 & 2 is")
+  if b > 0: # if b is greater than or equal to 0
+    print(f' y = {m}x + {b}')
+    print("or")  
+    print(f' y = ({m_dividend}/{m_divisor})x + {b}')
+  elif b < 0: # if b is less than 0
+    b = 0 - b # make it positive for display purposes
+    print(f' y = {m}x - {b_abs}') # use - b instead of + b
+    print("or")
+    print(f' y = ({m_dividend}/{m_divisor})x - {b}')
+  else: # if b == 0 remove it entirely
+    print(f' y = {m}x')
+    print("or")
+    print(f' y = ({m_dividend}/{m_divisor})x')
 
 
-
-
-# other vars
-
-m_int = m_dividend // m_divisor
-m_rem = m_dividend % m_divisor
-
-# output the result
-
-print("The slope of the line between points 1 & 2 is", 
-      m)
-print("or")
-print(str(m_dividend) +
-      "/" +
-      str(m_divisor) +
-      ".")
-
-print() # blank line
-
-
-print("The equation for the line between points 1 & 2 is")
-print(" y = " +
-      str(m) +
-      "x + " +
-      str(b)
-      )
-print("or")
-print(" y = (" +
-      str(m_dividend) +
-      "/" +
-      str(m_divisor) +
-      ")x + " +
-      str(b) +
-      ".")
-
-# todo: if b is negative output "- absolute_b" instead of "+ b"
-'''
-  if b<0
-  absolute_b = math.fabs(b)
-  # should we make these variables regardless of whether or not we are using them?
-'''
-
-# todo: if both m_dividend and m_divisor are negative, output absolute val
-'''
-  if m_dividend < 0
-  absolute_m_dend = math.fabs(m_dividend)
-  absolute_m_dsor = math.fabs(m_divisor)
-'''
-
-# todo: if m and/or b are whole numbers, output them as whole numbers
-'''
-if m_dividend % m_divisor == 0, 
-then print m_int not m
- # see if b is a whole number
-then print m_int and b_int
-'''
-
-# todo: if m is a whole number, do not print the 2nd equation or slope
-
+# todo: graph (and table?)
 ''' 
-  # how to test if m is a whole number
-    > get the type of m, if int (this will not work b/c people can put in fractions for x/y points)
-    > divide by 2, if r=1 or r=0 (maybe?)
+  mathplotlib.pyplot stuff goes here
 '''
 
-# todo: graph? (can you generate a graph using a turtle?)
-''' 
-  Pretty sure there is a way to import a math graph module for this
-'''
-
-# todo: reduce fractions
-'''
-    a. calculate m_dividend // m_divisor (int not float)
-        -10/5 = -2
-        3/5 = 0
-        10/7 = 1
-        10/4 = 2
-    b. calculate m_dividend % m_divisor 
-        r=0
-        r=3
-        r=3
-        r=2
-    if r=0 that means there is no denominator 
-       and the output (slope "m") can be "a"
-       
-    if r>0 then we need to make it an improper fraction again
-        c. calculate the numerator
-            b*a + b 
-            3*0 + 3
-            3*1 + 3 = 6 [THIS DOES NOT WORK]
-            2*2 + 2 = 6 [THIS DOES NOT WORK]
-        how do we get 10/4 to 5/2
-         > look into prime numbers...?  
-'''
 
 # end program
