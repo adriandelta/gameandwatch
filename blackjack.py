@@ -17,10 +17,10 @@ user_act = "default"
 print(f"Your starting total is {user_total}!")
 
 # as long as action is NOT pass, execute loop
-while (user_act != "Pass") and (user_act != "pass") and (user_act != "PASS") and (user_total <= 21):
+while (user_act.lower() != "pass") and (user_total <= 21):
     if user_act == "default": # first loop only
         user_act = input("Hit or Pass? ")
-    elif (user_act == "Hit") or (user_act == "hit") or (user_act == "HIT"):
+    elif (user_act.lower() == "hit"):
         user_draw = random.randint(1,11) # draws a random card
         if (user_draw == 11) and (user_total > 10): # if Ace/11 would cause bust
             user_draw = 1 # then use it as a 1 instead
@@ -42,7 +42,7 @@ if user_total > 21: #I'm not sure if I need this section but i'm scared to remov
     print("Computer wins!")
     sys.exit()
 
-elif (user_act == "Pass") or (user_act == "pass") or (user_act == "PASS"):
+elif user_act.lower() == "pass":
     print(f'Computer\'s turn!')
 
 NPC_total = random.randint(1,21) # computer starting draw
